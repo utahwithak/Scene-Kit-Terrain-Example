@@ -14,6 +14,15 @@
 		46BF43F71A70AB8B00612D12 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46BF43F61A70AB8B00612D12 /* Images.xcassets */; };
 		46BF43FA1A70AB8B00612D12 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46BF43F81A70AB8B00612D12 /* MainMenu.xib */; };
 		46BF44061A70AB8B00612D12 /* SceneExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46BF44051A70AB8B00612D12 /* SceneExampleTests.swift */; };
+		46BF44111A70ABA100612D12 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46BF440F1A70ABA100612D12 /* Utils.swift */; };
+		46BF44121A70ABA100612D12 /* Vector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46BF44101A70ABA100612D12 /* Vector3.swift */; };
+		46BF44141A70ABC800612D12 /* MapNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46BF44131A70ABC800612D12 /* MapNode.swift */; };
+		46BF44161A70AC2E00612D12 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46BF44151A70AC2E00612D12 /* Map.swift */; };
+		46BF44181A70AC3500612D12 /* TerrainGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46BF44171A70AC3500612D12 /* TerrainGenerator.swift */; };
+		46BF441A1A70AC3F00612D12 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46BF44191A70AC3F00612D12 /* Game.swift */; };
+		46BF441C1A70AE1A00612D12 /* TerrainNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46BF441B1A70AE1A00612D12 /* TerrainNode.swift */; };
+		46BF441E1A70B08A00612D12 /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46BF441D1A70B08A00612D12 /* CameraController.swift */; };
+		46BF44201A70B14200612D12 /* terrainColors.png in Resources */ = {isa = PBXBuildFile; fileRef = 46BF441F1A70B14200612D12 /* terrainColors.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +47,15 @@
 		46BF43FF1A70AB8B00612D12 /* SceneExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SceneExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		46BF44041A70AB8B00612D12 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		46BF44051A70AB8B00612D12 /* SceneExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneExampleTests.swift; sourceTree = "<group>"; };
+		46BF440F1A70ABA100612D12 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		46BF44101A70ABA100612D12 /* Vector3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector3.swift; sourceTree = "<group>"; };
+		46BF44131A70ABC800612D12 /* MapNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapNode.swift; sourceTree = "<group>"; };
+		46BF44151A70AC2E00612D12 /* Map.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
+		46BF44171A70AC3500612D12 /* TerrainGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TerrainGenerator.swift; sourceTree = "<group>"; };
+		46BF44191A70AC3F00612D12 /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		46BF441B1A70AE1A00612D12 /* TerrainNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TerrainNode.swift; sourceTree = "<group>"; };
+		46BF441D1A70B08A00612D12 /* CameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
+		46BF441F1A70B14200612D12 /* terrainColors.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = terrainColors.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +100,15 @@
 				46BF43EE1A70AB8B00612D12 /* AppDelegate.swift */,
 				46BF43F01A70AB8B00612D12 /* GameView.swift */,
 				46BF43F21A70AB8B00612D12 /* GameViewController.swift */,
+				46BF440F1A70ABA100612D12 /* Utils.swift */,
+				46BF441F1A70B14200612D12 /* terrainColors.png */,
+				46BF441D1A70B08A00612D12 /* CameraController.swift */,
+				46BF44131A70ABC800612D12 /* MapNode.swift */,
+				46BF44151A70AC2E00612D12 /* Map.swift */,
+				46BF44101A70ABA100612D12 /* Vector3.swift */,
+				46BF44191A70AC3F00612D12 /* Game.swift */,
+				46BF44171A70AC3500612D12 /* TerrainGenerator.swift */,
+				46BF441B1A70AE1A00612D12 /* TerrainNode.swift */,
 				46BF43F41A70AB8B00612D12 /* art.scnassets */,
 				46BF43F61A70AB8B00612D12 /* Images.xcassets */,
 				46BF43F81A70AB8B00612D12 /* MainMenu.xib */,
@@ -198,6 +225,7 @@
 				46BF43F51A70AB8B00612D12 /* art.scnassets in Resources */,
 				46BF43F71A70AB8B00612D12 /* Images.xcassets in Resources */,
 				46BF43FA1A70AB8B00612D12 /* MainMenu.xib in Resources */,
+				46BF44201A70B14200612D12 /* terrainColors.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,9 +243,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46BF44141A70ABC800612D12 /* MapNode.swift in Sources */,
+				46BF441A1A70AC3F00612D12 /* Game.swift in Sources */,
 				46BF43F11A70AB8B00612D12 /* GameView.swift in Sources */,
+				46BF441C1A70AE1A00612D12 /* TerrainNode.swift in Sources */,
 				46BF43F31A70AB8B00612D12 /* GameViewController.swift in Sources */,
+				46BF44161A70AC2E00612D12 /* Map.swift in Sources */,
+				46BF441E1A70B08A00612D12 /* CameraController.swift in Sources */,
 				46BF43EF1A70AB8B00612D12 /* AppDelegate.swift in Sources */,
+				46BF44181A70AC3500612D12 /* TerrainGenerator.swift in Sources */,
+				46BF44121A70ABA100612D12 /* Vector3.swift in Sources */,
+				46BF44111A70ABA100612D12 /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
