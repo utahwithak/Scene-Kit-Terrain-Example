@@ -9,14 +9,18 @@
 import Foundation
 import SceneKit
 
+// swiftlint:disable variable_name
 let TR_W:GLfloat = 53;
 let TR_H:GLfloat = 29;
 
+
 let HEIGHT_FACTOR:GLfloat = 5;
+// swiftlint:enable variable_name
 
 var colorsMap = [String:[NSColor]]()
-func  colorsFromPallet(_ palletName:NSString)->[NSColor]{
-    if let colors = colorsMap[palletName as String]{
+
+func  colorsFromPallet(_ palletName:NSString) -> [NSColor] {
+    if let colors = colorsMap[palletName as String] {
         return colors
     }
     else{
@@ -199,6 +203,7 @@ class MapNode:NSObject {
     override var description: String {
         return "[index:\(index) height:\(height)]"
     }
+    
     override var debugDescription:String{
         return description
     }

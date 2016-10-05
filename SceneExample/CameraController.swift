@@ -41,10 +41,7 @@ class CameraController:NSObject {
         scene.rootNode.addChildNode(cameraNode)
         super.init()
         lookPoint = Vector3(x: 0, y:0, z: 0)
-
-
     }
-    
     
     let minAngle:CGFloat = 10.0;
     let maxAngle:CGFloat = 85.0;

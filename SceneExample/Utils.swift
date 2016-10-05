@@ -202,7 +202,7 @@ func createTriangleGeometry(_ vertices:[Vertex], triangles:[CInt])->SCNGeometry{
 
 
 
-
+// swiftlint:disable variable_name
 public func calculateVectorNormal(_ A:SCNVector3, B:SCNVector3, C:SCNVector3)->SCNVector3
 {
     let AB = A - B
@@ -224,3 +224,4 @@ public func calculateVectorNormal(_ A:Float3, B:Float3, C:Float3)->Float3
     return cross.toFloat3()
  
 }
+// swiftlint:enable variable_name

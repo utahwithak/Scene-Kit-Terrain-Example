@@ -1,0 +1,19 @@
+disabled_rules:
+  - line_length
+  - todo
+  - file_length
+  - function_body_length
+  - type_body_length
+  - cyclomatic_complexity
+  - force_cast
+  - function_parameter_count
+
+excluded:
+  - Pods
+
+# Configuration
+variable_name:
+  min_length: 1 # only min_length
+  excluded: # excluded via string array
+    - ad
+    - ID

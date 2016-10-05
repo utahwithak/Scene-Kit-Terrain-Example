@@ -71,9 +71,9 @@ open class Map: NSObject {
     
     */
 */
-    func movePoint(x x_in:Int,y y_in:Int, dir:MapDir)->(x:Int, y:Int){
-        var x = UInt64(x_in)
-        var y = UInt64(y_in)
+    func movePoint(x xIn:Int,y yIn:Int, dir:MapDir)->(x:Int, y:Int){
+        var x = UInt64(xIn)
+        var y = UInt64(yIn)
 
         switch(dir){
         case .upLeft:fallthrough
@@ -86,20 +86,20 @@ open class Map: NSObject {
             }
         case .downRight:fallthrough
         case .right:
-            if x_in == (width - 1){
+            if xIn == (width - 1){
                 x =  0
             }
             else{
                 x = x + 1
             }
         default:
-            x = UInt64(x_in)
+            x = UInt64(xIn)
         }
         
         switch (dir){
         case .downLeft: fallthrough
         case .downRight:
-            if y_in == 0{
+            if yIn == 0{
                 y = UInt64(height - 1);
             }
             else{
@@ -107,7 +107,7 @@ open class Map: NSObject {
             }
         case .upRight: fallthrough
         case .upLeft:
-            if y_in == (height - 1){
+            if yIn == (height - 1){
                 y =  0;
             }
             else{
@@ -115,7 +115,7 @@ open class Map: NSObject {
             }
             
         default:
-            y = UInt64(y_in);
+            y = UInt64(yIn);
         }
 
         return (Int(x),Int(y))
