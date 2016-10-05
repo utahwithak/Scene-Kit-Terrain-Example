@@ -51,16 +51,16 @@ class GameView: SCNView {
     //
     //    }
     
-    override func mouseDragged(theEvent: NSEvent) {
+    override func mouseDragged(with theEvent: NSEvent) {
         
         if let controller = cameraNode{
             
             
-            let viewPoint = self.convertPoint(theEvent.locationInWindow, fromView: nil)
+            let viewPoint = self.convert(theEvent.locationInWindow, from: nil)
             let curHit = self.unprojectPoint(Vector3(x: viewPoint.x, y: viewPoint.y, z: 1))
             
             
-            var prevPoint = NSMakePoint(viewPoint.x - theEvent.deltaX, viewPoint.y + theEvent.deltaY)
+            let prevPoint = NSMakePoint(viewPoint.x - theEvent.deltaX, viewPoint.y + theEvent.deltaY)
             let prevHit = self.unprojectPoint(Vector3(x: prevPoint.x, y: prevPoint.y, z: 1))
             
             var delta = prevHit - curHit
@@ -96,10 +96,10 @@ class GameView: SCNView {
     //    }
     //
     //
-    override func scrollWheel(theEvent: NSEvent) {
+    override func scrollWheel(with theEvent: NSEvent) {
         if let camNode = cameraNode{
             let distanceToLookAt = camNode.distanceToLookPoint()
-            var scale = theEvent.deltaY
+            let scale = theEvent.deltaY
             if scale == 0{
                 return;
             }

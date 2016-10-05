@@ -10,12 +10,12 @@ import Foundation
 import CoreData
 
 public enum MapDir:Int{
-    case Left = 0
-    case DownLeft = 1
-    case DownRight = 2
-    case Right = 3
-    case UpRight = 4
-    case UpLeft = 5
+    case left = 0
+    case downLeft = 1
+    case downRight = 2
+    case right = 3
+    case upRight = 4
+    case upLeft = 5
     
     
     public var reverse:MapDir{
@@ -24,28 +24,28 @@ public enum MapDir:Int{
 }
 
 @objc(Map)
-public class Map: NSObject {
+open class Map: NSObject {
     
-    public var width: Int = 0
-    public var height: Int = 0
+    open var width: Int = 0
+    open var height: Int = 0
     
     var nodes = [MapNode]()
     
-    func indexOf(#x:Int,y:Int)->Int{
+    func indexOf(_ x:Int, _ y:Int)->Int{
         return (y * Int(width)) + x
     }
     
-    func translateIndex(index:Int)->(x:Int, y:Int){
+    func translateIndex(_ index:Int)->(x:Int, y:Int){
         let y = index / Int(self.width);
         let x = index - (y * Int(height));
         return (x,y)
     }
 
-    func negate(val:UInt64)->Int{
+    func negate(_ val:UInt64)->Int{
         return (val == 0) ? 1 : 0
     }
     
-    func moveIndex(index:Int, dir:MapDir)->(x:Int, y:Int){
+    func moveIndex(_ index:Int, dir:MapDir)->(x:Int, y:Int){
         let translated = translateIndex(index)
         return movePoint(x: translated.x, y: translated.y, dir: dir)
     }
@@ -76,16 +76,16 @@ public class Map: NSObject {
         var y = UInt64(y_in)
 
         switch(dir){
-        case .UpLeft:fallthrough
-        case .Left:
+        case .upLeft:fallthrough
+        case .left:
             if (x == 0){
                 x = UInt64(width - 1);
             }
             else{
                 x = x - 1
             }
-        case .DownRight:fallthrough
-        case .Right:
+        case .downRight:fallthrough
+        case .right:
             if x_in == (width - 1){
                 x =  0
             }
@@ -97,16 +97,16 @@ public class Map: NSObject {
         }
         
         switch (dir){
-        case .DownLeft: fallthrough
-        case .DownRight:
+        case .downLeft: fallthrough
+        case .downRight:
             if y_in == 0{
                 y = UInt64(height - 1);
             }
             else{
                 y = (y - 1);
             }
-        case .UpRight: fallthrough
-        case .UpLeft:
+        case .upRight: fallthrough
+        case .upLeft:
             if y_in == (height - 1){
                 y =  0;
             }

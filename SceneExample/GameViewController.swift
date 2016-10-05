@@ -58,7 +58,7 @@ class GameViewController: NSViewController {
 //        self.gameView!.backgroundColor = NSColor.blackColor()
         
         game.createRandomMap()
-        var tNode = TerrainNode(map: game.map)
+        let tNode = TerrainNode(map: game.map)
         self.gameView!.scene?.rootNode.addChildNode(tNode)
         
         

@@ -47,7 +47,7 @@ public extension SCNVector3{
         return Float3(x: GLfloat(self.x), y: GLfloat(self.y), z: GLfloat(self.z))
     }
     
-    func cross(vector: SCNVector3) -> SCNVector3 {
+    func cross(_ vector: SCNVector3) -> SCNVector3 {
         return SCNVector3Make(y * vector.z - z * vector.y, z * vector.x - x * vector.z, x * vector.y - y * vector.x)
     }
     var length:Double{
@@ -77,16 +77,16 @@ public extension SCNVector3{
         return SCNVector3(x: x, y: y, z: z)
     }
     
-    static func angle(from:SCNVector3 , to:SCNVector3)->CGFloat
+    static func angle(_ from:SCNVector3 , to:SCNVector3)->CGFloat
     {
-        let clamped = clamp ( dot(from.normalized, b: to.normalized), -1, 1)
+        let clamped = clamp(dot(from.normalized, b: to.normalized), min: -1, max: 1)
         return acos(clamped) * CGFloat(180.0 / M_PI);
     }
     
-    static func dot(a:SCNVector3, b:SCNVector3)->CGFloat{
+    static func dot(_ a:SCNVector3, b:SCNVector3)->CGFloat{
         return (a.x*b.x) + (a.y*b.y) + (a.z*b.z)
     }
-    static func moveTowards ( current:SCNVector3,  target:SCNVector3,  maxDistanceDelta:CGFloat)->SCNVector3
+    static func moveTowards ( _ current:SCNVector3,  target:SCNVector3,  maxDistanceDelta:CGFloat)->SCNVector3
     {
         let a = target - current;
         let magnitude = a.magnitude;
@@ -98,7 +98,7 @@ public extension SCNVector3{
     }
 
 }
-extension SCNVector3:DebugPrintable{
+extension SCNVector3:CustomDebugStringConvertible{
     public var debugDescription:String{
         return "[x:\(x) y:\(y) z:\(z)]"
     }

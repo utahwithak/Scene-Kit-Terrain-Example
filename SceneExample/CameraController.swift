@@ -10,7 +10,7 @@ import Cocoa
 import SceneKit
 
 class CameraController:NSObject {
-    class func createController(scene:SCNScene)->CameraController{
+    class func createController(_ scene:SCNScene)->CameraController{
         return CameraController(scene: scene)
     }
     let camera:SCNCamera
@@ -53,23 +53,23 @@ class CameraController:NSObject {
 
     
     var angleFromFloorToCamera:CGFloat{
-        var cam = cameraNode.back;
-        var camProjectionOntoFloor = Vector3(x:cam.x,y:cam.y, z:0);
+        let cam = cameraNode.back;
+        let camProjectionOntoFloor = Vector3(x:cam.x,y:cam.y, z:0);
     
         return Vector3.angle(camProjectionOntoFloor, to: cam);
     }
  
-    func moveCamera(delta:Vector3){
+    func moveCamera(_ delta:Vector3){
         cameraNode.position = cameraNode.position + delta
     }
     
-    func distanceToPoint(point:Vector3)->CGFloat{
+    func distanceToPoint(_ point:Vector3)->CGFloat{
         return (cameraNode.position - point).magnitude
     }
     func distanceToLookPoint()->CGFloat{
         return distanceToPoint(lookPoint)
     }
-    func repositionCamera(newPosition:Vector3){
+    func repositionCamera(_ newPosition:Vector3){
         moveCamera(newPosition - cameraNode.position);
     }
     

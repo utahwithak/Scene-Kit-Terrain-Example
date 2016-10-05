@@ -17,24 +17,24 @@ class TerrainGenerator{
     init(size:Int){
         width = size
         height = size
-        values = Array<Double>(count: size*size, repeatedValue: 0)
+        values = Array<Double>(repeating: 0, count: size*size)
     }
     
     var minVal:Double = 100000
     var maxVal:Double = -1000000
     
 
-    func runAlgorithm(map:Map){
+    func runAlgorithm(_ map:Map){
 
         var samplesize = 32;
-        println("Generating with feature size:\(samplesize)")
+        print("Generating with feature size:\(samplesize)")
 
         var scale:Double = 2
         
         while (samplesize > 1)
         {
             
-            println("Running Diamond Square Sample Size:\(samplesize)")
+            print("Running Diamond Square Sample Size:\(samplesize)")
             diamondSquare(samplesize, scale: scale);
             samplesize /= 2;
             scale /= 2.0;
@@ -43,7 +43,7 @@ class TerrainGenerator{
     }
     
     
-    func  adjustHeight(h1:Double, h2:Double,x:Int,y:Int)->Bool
+    func  adjustHeight(_ h1:Double, h2:Double,x:Int,y:Int)->Bool
     {
         if (abs(h1 - h2) > 50) {
             setSample(x, y: y, value:  h1 + ((h1 < h2) ? 50 : -50));
@@ -55,11 +55,11 @@ class TerrainGenerator{
     
     /* Ensure that map heights of adjacent fields are not too far apart. */
 
-    func generateFromImage(image:NSBitmapImageRep,map:Map){
+    func generateFromImage(_ image:NSBitmapImageRep,map:Map){
         for y in 0..<height{
             for x in 0..<width{
-                if let color = image.colorAtX(x, y: y){
-                    if let convertedColor = color.colorUsingColorSpace(NSColorSpace.genericGrayColorSpace()){
+                if let color = image.colorAt(x: x, y: y){
+                    if let convertedColor = color.usingColorSpace(NSColorSpace.genericGray){
                         let white = convertedColor.whiteComponent
                         let val = Double(round(white*256) - 127)
                         setSample(x, y: y, value: val)
@@ -72,7 +72,7 @@ class TerrainGenerator{
     }
     
 
-    func saveToMap(map:Map, scale:Double = 1){
+    func saveToMap(_ map:Map, scale:Double = 1){
         map.width = self.width
         map.height = self.height
         var sortedTiles = [MapNode]()
@@ -87,18 +87,18 @@ class TerrainGenerator{
         
         for index in 0..<sortedTiles.count{
             let current = sortedTiles[index]
-            let leftInds = map.moveIndex(index, dir: .Left)
-            var other = sortedTiles[map.indexOf(x: leftInds.x , y: leftInds.y) ]
+            let leftInds = map.moveIndex(index, dir: .left)
+            var other = sortedTiles[map.indexOf(leftInds.x , leftInds.y) ]
             current.left = other
             other.right = current
             
-            let upLeft = map.moveIndex(index, dir: .UpLeft)
-            other = sortedTiles[map.indexOf(x: upLeft.x , y: upLeft.y) ]
+            let upLeft = map.moveIndex(index, dir: .upLeft)
+            other = sortedTiles[map.indexOf(upLeft.x , upLeft.y) ]
             current.upLeft = other
             other.downRight = current
            
-            let upRight = map.moveIndex(index, dir: .UpRight)
-            let translated = map.indexOf(x:  upRight.x , y: upRight.y)
+            let upRight = map.moveIndex(index, dir: .upRight)
+            let translated = map.indexOf(upRight.x , upRight.y)
             let upRightNode =  sortedTiles[translated]
             current.upRight = upRightNode
             upRightNode.downLeft = current
@@ -108,12 +108,12 @@ class TerrainGenerator{
         
     }
     
-    func sample(x:Int, y:Int)->Double
+    func sample(_ x:Int, y:Int)->Double
     {
         return values[(x & (width - 1)) + (y & (height - 1)) * width];
     }
 
-    func setSample(x:Int, y:Int,  value:Double)
+    func setSample(_ x:Int, y:Int,  value:Double)
     {
         if value < minVal{
             minVal = value
@@ -127,7 +127,7 @@ class TerrainGenerator{
     }
     
     
-    func sampleSquare(x:Int, y:Int,  size:Int,  value:Double)
+    func sampleSquare(_ x:Int, y:Int,  size:Int,  value:Double)
     {
         let hs = size / 2
         let a = sample(x - hs, y: y - hs)
@@ -139,7 +139,7 @@ class TerrainGenerator{
     
     }
     
-    func sampleDiamond( x:Int,  y:Int,  size:Int, value:Double)
+    func sampleDiamond( _ x:Int,  y:Int,  size:Int, value:Double)
     {
         let  hs = size / 2;
     
@@ -154,22 +154,23 @@ class TerrainGenerator{
     func frand()->Double{
         return Double(arc4random_uniform(3))-1
     }
-    func diamondSquare( stepsize:Int,  scale:Double)
+
+    func diamondSquare( _ stepsize:Int,  scale:Double)
     {
     
-        var halfstep = stepsize / 2;
-    
-        for var y = halfstep; y < height + halfstep; y += stepsize {
-            for var x = halfstep; x < width + halfstep; x += stepsize{
+        let halfstep = stepsize / 2;
+
+        for y in stride(from: halfstep, to: height + halfstep, by: stepsize) {
+            for x in stride(from: halfstep, to: width + halfstep, by: stepsize) {
                 let val = frand()
-                sampleSquare(x, y: y, size: stepsize, value:val  * scale);
+                sampleSquare(x, y: y, size: stepsize, value: val * scale)
             }
         }
-    
-        for var y = 0; y < height; y += stepsize {
-            for var x = 0; x < width; x += stepsize {
-                sampleDiamond(x + halfstep, y: y, size: stepsize, value:frand() * scale);
-                sampleDiamond(x, y: y + halfstep, size: stepsize, value:frand() * scale);
+
+        for y in stride(from: 0, to: height, by: stepsize) {
+            for x in stride(from: 0, to: width, by: stepsize) {
+                sampleDiamond(x + halfstep, y: y, size: stepsize, value:frand() * scale)
+                sampleDiamond(x, y: y + halfstep, size: stepsize, value:frand() * scale)
             }
         }
     

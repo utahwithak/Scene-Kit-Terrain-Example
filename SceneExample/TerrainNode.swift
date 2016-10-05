@@ -9,6 +9,7 @@
 import Cocoa
 import SceneKit
 
+
 class TerrainNode: SCNNode {
   
     let map:Map
@@ -25,39 +26,41 @@ class TerrainNode: SCNNode {
         
 
     }
-    
-     override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        
         if keyPath == "layers"{
            //self.reloadGeometry()
         }
         else {
-            super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
+            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }
     }
+
     required init(coder adecoder:NSCoder){
         self.map = Map()
 //        self.colors = [NSColor]()
-        super.init(coder:adecoder)
+        super.init(coder:adecoder)!
     }
         
     func reloadGeometry(){
         self.geometry = nil
-        loadGeometry(.Flattened)
+        loadGeometry(.flattened)
     }
 
     enum RenderType{
-        case Strips
-        case Triangles
-        case Flattened
+        case strips
+        case triangles
+        case flattened
     }
     
     let terrainHolder = SCNNode()
-    func loadGeometry(type:RenderType){
+    func loadGeometry(_ type:RenderType){
         
         var rootNode:SCNNode? = nil
         let terrainMaterial = SCNMaterial()
         switch (type){
-        case .Strips:
+        case .strips:
             var vertecies = [Vertex]()
             var triangles = [CInt]()
             let nodes = self.map.nodes
@@ -74,14 +77,14 @@ class TerrainNode: SCNNode {
                 }
                 
             }
-            let geometry = createStripGeometry(vertecies, triangles)
+            let geometry = createStripGeometry(vertecies, triangles: triangles)
             geometry.materials = [terrainMaterial]
             self.geometry = geometry
-        case .Triangles:
+        case .triangles:
             rootNode = SCNNode()
             genTris(rootNode!)
             
-        case .Flattened:
+        case .flattened:
             rootNode = SCNNode()
             genTris(rootNode!)
             rootNode = rootNode?.flattenedClone()
@@ -92,7 +95,7 @@ class TerrainNode: SCNNode {
         }
         
     }
-    func genTris(root:SCNNode){
+    func genTris(_ root:SCNNode){
         let terrainMaterial = SCNMaterial()
 
         let nodes = self.map.nodes
@@ -102,14 +105,14 @@ class TerrainNode: SCNNode {
                 var verts = tile.upTriangle
                 var triangles:[CInt] = [0,2,1]
                 
-                let geometry = createTriangleGeometry(verts, triangles)
+                let geometry = createTriangleGeometry(verts, triangles: triangles)
                 geometry.materials = [terrainMaterial]
                 let childNode = SCNNode(geometry: geometry)
                 root.addChildNode(childNode)
                 
                 verts = tile.downTriangle
                 triangles = [0,2,1]
-                let downGeometry = createTriangleGeometry(verts, triangles)
+                let downGeometry = createTriangleGeometry(verts, triangles: triangles)
                 
                 downGeometry.materials = [terrainMaterial]
                 let downTriangle = SCNNode(geometry: downGeometry)
