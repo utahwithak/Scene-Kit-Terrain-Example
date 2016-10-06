@@ -9,8 +9,8 @@
 import SceneKit
 
 class GameView: SCNView {
-    var cameraNode:CameraController? = nil
-    
+    var cameraNode: CameraController? = nil
+
     override func mouseDragged(with theEvent: NSEvent) {
         guard let controller = cameraNode else {
             return
@@ -18,11 +18,10 @@ class GameView: SCNView {
 
         let viewPoint = convert(theEvent.locationInWindow, from: nil)
         let curHit = unprojectPoint(Vector3(x: viewPoint.x, y: viewPoint.y, z: 1))
-        
-        
-        let prevPoint = NSMakePoint(viewPoint.x - theEvent.deltaX, viewPoint.y + theEvent.deltaY)
+
+        let prevPoint = CGPoint(x: viewPoint.x - theEvent.deltaX, y: viewPoint.y + theEvent.deltaY)
         let prevHit = unprojectPoint(Vector3(x: prevPoint.x, y: prevPoint.y, z: 1))
-        
+
         var delta = prevHit - curHit
         delta.y = 0
         controller.lookPoint = controller.lookPoint + (delta)
@@ -38,20 +37,18 @@ class GameView: SCNView {
 
         let distanceToLookAt = camNode.distanceToLookPoint()
         let scale = theEvent.deltaY
-        if scale == 0{
-            return;
+        if scale == 0 {
+            return
         }
         var distanceToMove = theEvent.deltaY
-        
-        
-        if((distanceToLookAt - distanceToMove) > camNode.maxZoom){
-            distanceToMove = distanceToLookAt - camNode.maxZoom;
+
+        if (distanceToLookAt - distanceToMove) > camNode.maxZoom {
+            distanceToMove = distanceToLookAt - camNode.maxZoom
+        } else if (distanceToLookAt - distanceToMove) < camNode.minZoom {
+            distanceToMove = distanceToLookAt - camNode.minZoom
         }
-        else if((distanceToLookAt - distanceToMove) < camNode.minZoom){
-            distanceToMove = distanceToLookAt - camNode.minZoom;
-        }
-        
+
         camNode.repositionCamera(Vector3.moveTowards(camNode.cameraPosition, target: camNode.lookPoint, maxDistanceDelta: distanceToMove))
     }
-    
+
 }

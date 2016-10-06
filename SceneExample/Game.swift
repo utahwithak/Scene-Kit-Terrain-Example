@@ -12,9 +12,8 @@ import Cocoa
 class Game: NSObject {
     var map: Map = Map()
 
-    func createRandomMap(){
+    func createRandomMap() {
         let generator = TerrainGenerator(size: 64)
         generator.runAlgorithm(map)
-        
     }
 }
